@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Large model files (Piper TTS ONNX models etc.)
+*.onnx
+*.onnx.json
