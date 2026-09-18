@@ -1,0 +1,33 @@
+{% extends 'base.html' %}  <!-- 부모페이지로 부터 상속을 받는다는 의미 -->
+{% block content %}   <!-- override 자식페이지에서 재정의 하는 블럭 -->
+    <main>
+    <div class="screen">
+        <img src="/static/images/todo_img.png" alt="포켓몬 도감" class="dex-logo">
+        <h2 class="section-heading">나의 포켓몬 도감</h2>
+
+        <form action="/add" method="post">
+            <textarea name="task" rows="3" placeholder="추가할 포켓몬을 입력하세요"></textarea>
+            <button type="submit">도감에 등록</button>
+        </form>
+
+        <h3 class="section-heading small">등록된 포켓몬</h3>
+        <ul class="task-list">
+            {% for todo in todos %}
+            <li class="task">
+                <span class="dex-no">{{ '%03d' % todo.id }}</span>
+                {% if todo.pokemon_image %}
+                    <img class="pokemon-thumb" src="/static/images/pokemon/{{ todo.pokemon_image }}" alt="포켓몬">
+                {% endif %}
+                <span class="label {% if todo.completed %}done{% endif %}">{{ todo.task }}</span>
+                <span class="task-actions">
+                    <a class="icon-btn" href="edit/{{ todo.id }}">수정</a>
+                    <a class="icon-btn danger" href="delete/{{ todo.id }}">놓아주기</a>
+                </span>
+            </li>
+            {% else %}
+            <li class="empty-state">아직 등록된 포켓몬이 없어요</li>
+            {% endfor %}
+        </ul>
+    </div>
+    </main>
+{% endblock %}

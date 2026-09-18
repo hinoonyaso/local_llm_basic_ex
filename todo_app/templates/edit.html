@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+    <div class="screen">
+        <img src="/static/images/todo_img.png" alt="포켓몬 도감" class="dex-logo">
+        <h2 class="section-heading">포켓몬 No.{{ '%03d' % todo.id }} 수정</h2>
+
+        <form action="/edit/{{ todo.id }}" method="post">
+            <textarea name="task" rows="4">{{ todo.task }}</textarea>
+            <label class="checkbox-row" for="completed">
+                <input type="checkbox" id="completed" name="completed" {% if todo.completed %}checked{% endif %}>
+                포획 완료?
+            </label>
+            <button type="submit">저장하기</button>
+        </form>
+    </div>
+    </main>
+{% endblock %}
